@@ -1,3 +1,13 @@
+/*
+ * Brandon Silvibarr
+ * COMP-003B: ASP.NET Core
+ *  Instructor: Jonathan Cruz
+ *
+ * This project will demonstrate the MVC request pipeline, middleware configuration,
+ * controllers, views, layout design, and partial views.
+ */
+
+
 namespace COMP003B.Assignment2;
 
 public class Program
@@ -20,14 +30,23 @@ public class Program
         }
 
         app.UseHttpsRedirection();
+
+        app.UseStaticFiles();
+
+        app.UseWelcomePage("/welcome");
+        
+        //custom middleware
+        app.UseMiddleware<RequestTrackerMiddleware>();
+        
         app.UseRouting();
 
         app.UseAuthorization();
 
         app.MapStaticAssets();
+        
         app.MapControllerRoute(
-            name: "default",
-            pattern: "{controller=Home}/{action=Index}/{id?}")
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}")
             .WithStaticAssets();
 
         app.Run();
