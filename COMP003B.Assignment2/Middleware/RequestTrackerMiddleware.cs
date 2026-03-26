@@ -18,5 +18,5 @@ public class RequestTrackerMiddleware
         Console.WriteLine($"Response Status: {context.Request.Method}");
     }
 }
-    
+
     
